@@ -10,6 +10,7 @@
     export let item2={}
     afterUpdate(()=>{
         get_profile()
+        console.log(item);
     })
     onMount(()=>{
         console.log(item);
@@ -108,7 +109,13 @@
                                 </div>
                             </div>
                             <div>
-                                <p>Your ans:<strong class="ml-4">{item.ans.filter((val)=>val.id==qn.id)[0].ans}</strong></p>
+                                
+                                    {#if item.ans.filter((val)=>val.id==qn.id).length!=0}
+                                    <p>Your answer: <strong class="ml-4">{item.ans.filter((val)=>val.id==qn.id)[0].ans}</strong></p>
+                                    {:else}
+                                        <p><strong>Not attempted</strong></p>
+                                    {/if}
+                
                             </div>
                         </div>
                     {/each}

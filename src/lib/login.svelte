@@ -10,6 +10,7 @@
     const disp=createEventDispatcher()
     export let width;
     export let is_show;
+    export let q_id=null
     let name='',pass='',main_w="500px"
     if(width<500){
         main_w=`${width-50}px`
@@ -81,6 +82,10 @@
                 }
                 crd.set({username:ack.name,key:ack.token})
                 loading.set(false)
+                if (q_id) {
+                    disp("done")
+                    return
+                }
                 goto('/home')
                 
             } catch (error) {

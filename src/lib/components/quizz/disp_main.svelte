@@ -6,7 +6,9 @@
 	import TodispT from "./todisp_t.svelte";
 	import Taken2List from "./taken2_list.svelte";
 	import Conduct2Stat from "./conduct2_stat.svelte";
-
+	import TodispC from "./todisp_c.svelte";
+	import { afterUpdate } from "svelte";
+    export let lead
     let taken,others;
     taken_data.subscribe(async(val)=>{
         if(!val.fetched){
@@ -15,6 +17,16 @@
         }
         taken=val.data;
         others=val.other
+    })
+    let is_lead=false
+    afterUpdate(()=>{
+        if(lead.hasOwnProperty('data')){
+            let item=conduct.find((val)=>val.q_id==lead.data.q_id)
+                    if(item){
+                        borad2_c=item
+                    }
+            is_lead=true
+        }
     })
     let conduct;
     conduct_data.subscribe(async(val)=>{
@@ -42,12 +54,12 @@
                 <Taken1List list={taken} on:change={(data)=>{
                     let item=taken.find((val)=>val.q_id==data.detail)
                     if(item){
-                        borad2_c=item.data
+                        borad2=item.data
                     }
                     todisp2=others.find((val)=>val.q_id==data.detail)
                 }}></Taken1List>
             {:else} <Conduct1_list list={conduct} on:change={(data)=>{
-                let item=taken.find((val)=>val.q_id==data.detail)
+                let item=conduct.find((val)=>val.q_id==data.detail)
                     if(item){
                         borad2_c=item
                     }
@@ -59,7 +71,7 @@
                 <Taken2List list={borad2} on:change={(data)=>{
                     to_disp=borad2[data.detail]
                 }}></Taken2List>
-            {:else} <Conduct2Stat></Conduct2Stat>
+            {:else} <Conduct2Stat data={borad2_c}></Conduct2Stat>
             {/if}
         </div>
     </div>
@@ -79,7 +91,9 @@
                 <TodispT item={to_disp} item2={todisp2} on:change={(data)=>{
                     to_disp=borad2[data.detail]
                 }}></TodispT>
-        {:else} <Conduct1_list></Conduct1_list>
+        {:else} <TodispC data={borad2_c} is_lead={is_lead} on:relaod={()=>{
+            borad2_c={}
+        }}></TodispC>
         {/if}
     </div>
 </div>

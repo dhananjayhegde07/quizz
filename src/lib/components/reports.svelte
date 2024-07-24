@@ -1,7 +1,7 @@
 <script>
 	import Circular from "$lib/extra/circular.svelte";
 	import Circular_2 from "$lib/extra/circular_2.svelte";
-import { crd } from "$lib/writable/crd";
+    import { crd } from "$lib/writable/crd";
 	import { reports } from "$lib/writable/data";
     import { width_val } from "$lib/writable/loading";
 	import { onMount } from "svelte";
@@ -45,24 +45,26 @@ import { crd } from "$lib/writable/crd";
         <div class="h-full w-full grid place-items-center">
             <p>Unable to fetch</p>
         </div>
+        {:else}
+        <div class="grid place-items-center">
+            <div>
+                <p>Average score</p>
+                <Circular progress={data.avg}></Circular>
+            </div>
+        </div>
+    
+        <div class="flex mt-3 justify-around">
+            <div class="">
+                <p>Highest score</p>
+                <Circular_2 stroke={'green'} text={data.high}></Circular_2>
+            </div>
+            <div class="">
+                <p>Lowest score</p>
+                <Circular_2 stroke={'red'} text={data.low}></Circular_2>
+            </div>
+        </div>
     {/if}
-    <div class="grid place-items-center">
-        <div>
-            <p>Average score</p>
-            <Circular progress={data.avg}></Circular>
-        </div>
-    </div>
-
-    <div class="flex mt-3 justify-around">
-        <div class="">
-            <p>Highest score</p>
-            <Circular_2 stroke={'green'} text={data.high}></Circular_2>
-        </div>
-        <div class="">
-            <p>Lowest score</p>
-            <Circular_2 stroke={'red'} text={data.low}></Circular_2>
-        </div>
-    </div>
+    
 </div>
 
 <style>

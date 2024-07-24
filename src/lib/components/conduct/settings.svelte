@@ -106,7 +106,7 @@
             notification.set({msg:'Settings updated',on:true})
         }}>Save as default</button>
         <button on:click={()=>{
-            write.set({settings:setobj,qns:write_val.qns,started:true})
+            write.set({settings:setobj,qns:write_val.qns,started:true,title:$write.title})
         }}>Save changes</button>
     </div>
 </div>

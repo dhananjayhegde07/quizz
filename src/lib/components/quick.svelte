@@ -1,5 +1,7 @@
 <script>
+	import { goto } from "$app/navigation";
 	import { width_val } from "$lib/writable/loading";
+	import { createEventDispatcher } from "svelte";
     let width,width_div='45%'
     width_val.subscribe((val)=>{
         width=val
@@ -10,6 +12,7 @@
             width_div='45%'
         }
     })
+    let disp=createEventDispatcher()
 </script>
 
 <div class="main" style="width: {width_div};">
@@ -19,7 +22,9 @@
             <div class="bg take">
                     <div class="grid place-items-center mt-3"><img src="/join.png" alt=""></div>
                     <p>Take a quizz</p>
-                <div class="grid place-items-center"><button>Go!</button></div>
+                <div class="grid place-items-center"><button on:click={()=>{
+                   disp('take')
+                }}>Go!</button></div>
             </div>
             <div class="extra">
                 <div class="bg other">
@@ -27,14 +32,9 @@
                         <img src="/quiz.png" alt="">
                         <p>Conduct a quizz</p>
                     </div>
-                    <button>Go!</button>
-                </div>
-                <div class="bg other">
-                    <div class="flex">
-                        <img src="/class.png" alt="">
-                        <p>Create a class</p>
-                    </div>
-                    <button>Go!</button>
+                    <button  on:click={()=>{
+                        disp('conduct')
+                     }}>Go!</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
         height: 40px;
     }
     .other{
-        height: 45%;
+        height: 100%;
         display: grid;
         place-items: center;
     }

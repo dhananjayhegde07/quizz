@@ -1,12 +1,14 @@
 <script>
 	import ProgressBar from "$lib/components/progress_bar.svelte";
 	import { width_val } from "$lib/writable/loading";
+	import { createEventDispatcher } from "svelte";
 	import Quick from "./quick.svelte";
 	import RandomQna from "./random_qna.svelte";
 	import Recents from "./recents.svelte";
 	import Reports from "./reports.svelte";
     import Tips from "./tips.svelte";
     import {gsap} from 'gsap'
+    let disp=createEventDispatcher()
     let width
     width_val.subscribe((val)=>[
         width=val
@@ -24,7 +26,11 @@
         <Tips></Tips>
         <div class="mt-3 flex second">
             <ProgressBar></ProgressBar>
-            <Quick></Quick>
+            <Quick on:take={()=>{
+                disp('take')
+            }} on:conduct={()=>{
+                disp('conduct')
+            }}></Quick>
         </div>
         <div class="mt-3 flex second">
             <Reports></Reports>

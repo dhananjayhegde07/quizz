@@ -12,6 +12,7 @@
     }
     set_ans()
     taken.subscribe((val)=>{
+        console.log(val);
         set_ans()
     })
     async function submit_quiz(){
@@ -28,7 +29,7 @@
             <p>LOLO Quizz</p>
         </div>
         <div class="end">
-            <p></p>
+            <p>{$taken.info.q_id}</p>
         </div>
     </div>
     <div class="bottom">

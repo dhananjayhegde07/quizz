@@ -85,14 +85,16 @@
     <slot></slot>
 {/if}
 {#if is_notification}
-    <div class="noti_main">
-        <div class="notification">
+    <div class="h-14 w-screen z-40 absolute top-8 left-0 grid place-items-center">
+        <div class="notification h-14">
             <div class="msg">
-                <p class="themsg">{msg}</p>
-                <p class="cancel" on:click={()=>{
+                <p class="themsg grid place-items-center overflow-scroll">{msg}</p>
+                <div class="cancel" on:click={()=>{
                     notification.set({msg:'',on:false})
                     clearTimeout(timeid)
-                }}>X</p>
+                }}>
+                    <svg class="w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>
+                </div>
             </div>
             <div class="progress"></div>
         </div>
@@ -125,16 +127,15 @@
     .notification{
        background-color: rgb(172, 172, 172);
        border-radius: 5px;
-       padding-top: 5px; ;
        width: 300px;
-       min-height: 50px;
     }
     .msg{
         display: flex;
-        height: 90%;
+        height: calc(100% - 5px);
     }
     .msg .themsg{
-        width: 90%;
+        width: calc(100% - 30px);
+        height: 100%;
         margin-left: 10px;
     }
     .cancel{

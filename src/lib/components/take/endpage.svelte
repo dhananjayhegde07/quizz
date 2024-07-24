@@ -36,7 +36,9 @@
             {/if}
             <p class="m-3">Thanks for choosing our platform</p>
             <div class="btn">
-                <button>View Leaderborad</button>
+                <!-- <button on:click={()=>{
+                    goto('/home',{state:{data:'lead'}})
+                }}>View Leaderborad</button> -->
                 <button on:click={()=>{
                     goto('/home')
                 }}>Go home</button>

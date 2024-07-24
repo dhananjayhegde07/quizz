@@ -5,14 +5,15 @@
     current.subscribe((val)=>{
         current_set=val.set;
     })
+    export let lead
 </script>
 
-<div class="main relative">
+<div class="main relative ">
     {#if current_set}
         <!--  -->
     {/if}
     {#if !current_set}
-        <DispMain></DispMain>
+        <DispMain lead={lead}></DispMain>
     {/if}
 </div>
 

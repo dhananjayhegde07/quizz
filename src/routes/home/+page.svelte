@@ -15,11 +15,13 @@
 	import Share from '$lib/components/conduct/share.svelte';
 	import { nav_bar } from '$lib/writable/navigation';
 	import Quizz from '$lib/components/quizz/quizz.svelte';
+	import { page } from '$app/stores';
     let div:HTMLDivElement
     let crd_val
     let cur_date_time=''
     let width
     let nav_mb=false,nav_mb_div
+    
     width_val.subscribe((val)=>{
         width=val
     })
@@ -44,6 +46,20 @@
                 goto('/')
             }
         })
+        console.log($page.state);
+        if($page.state.hasOwnProperty('data')){
+        for(let i of Object.keys(obj)){
+            obj[i]=false
+        }
+        console.log($page.state);
+        
+        if($page.state.data=='lead')
+            obj['quizz']=true
+        if($page.state.data=='take')
+            obj['take']=true
+        nav_bar.set(obj);
+        }
+        
         let res=await fetch('/home/getdata',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
@@ -79,7 +95,19 @@
             nav_mb=true
         }}></HeadingHome>
         {#if obj.home}
-            <Home></Home>
+            <Home on:take={()=>{
+                for(let i of Object.keys(obj)){
+                obj[i]=false
+                }
+            obj['take']=true
+            nav_bar.set(obj);
+            }} on:conduct={()=>{
+                for(let i of Object.keys(obj)){
+                obj[i]=false
+                }
+            obj['conduct']=true
+            nav_bar.set(obj);
+            }}></Home>
         {/if}
         {#if obj.conduct}
             <Conduct></Conduct>
@@ -88,7 +116,7 @@
             <Take></Take>
         {/if}
         {#if obj.quizz}
-            <Quizz></Quizz>
+            <Quizz lead={$page.state}></Quizz>
         {/if}
     </div>
 </div>
