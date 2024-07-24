@@ -6,6 +6,7 @@
 	import { crd } from "$lib/writable/crd";
     import {notification} from '$lib/writable/notification'
     export let data={}
+    export let auth=true
     let avg=0,low,high=0
     function calc(){
         if(Object.keys(data).length==0)return
@@ -50,8 +51,8 @@
 </script>
 
 {#if Object.keys(data).length!=0 &&!get_auth}
-    <div class=" flex flex-col justify-around h-full">
-        <div class="flex items-center justify-around h-1/3">
+    <div class=" flex flex-col justify-evenly h-full">
+        <div class="flex items-center justify-around">
             <div class="flex-row items-center">
                 <p>Average Score</p>
                 <Circular progress={avg}></Circular>
@@ -61,7 +62,7 @@
                 <Circular_2 text={`${data.count}`}></Circular_2>
             </div>
         </div>
-        <div class="flex items-center justify-around h-1/3">
+        <div class="flex items-center justify-around ">
             <div>
                 <p>Highest score</p>
                 <Circular_2 text={`${high}`} ></Circular_2>
@@ -71,7 +72,8 @@
                 <Circular_2 text={`${low}`} stroke={'red'}></Circular_2>
             </div>
         </div>
-        <div class="h-1/3 relative">
+        {#if auth}
+        <div class=" relative">
             <h2 class="grid place-items-center text-xl underline">Authority key</h2>
             <LoadingAuto on={is_auth}></LoadingAuto>
             {#if authkey==''}
@@ -101,6 +103,7 @@
                 </div>
             {/if}
         </div>
+        {/if}
     </div>
     {:else if get_auth}
         <div class="relative h-full w-full bg-blue-200">

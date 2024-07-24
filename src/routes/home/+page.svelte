@@ -16,6 +16,7 @@
 	import { nav_bar } from '$lib/writable/navigation';
 	import Quizz from '$lib/components/quizz/quizz.svelte';
 	import { page } from '$app/stores';
+	import Auth from '$lib/components/auth/auth.svelte';
     let div:HTMLDivElement
     let crd_val
     let cur_date_time=''
@@ -33,7 +34,8 @@
         home:true,
         take:false,
         conduct:false,
-        quizz:false
+        quizz:false,
+        auth:false
     }
     nav_bar.subscribe((val)=>{
         obj=val
@@ -118,7 +120,11 @@
         {#if obj.quizz}
             <Quizz lead={$page.state}></Quizz>
         {/if}
+        {#if obj.auth}
+            <Auth></Auth>
+        {/if}
     </div>
+
 </div>
 
 {:else}
@@ -137,6 +143,7 @@
         {#if obj.take}
             <Take></Take>
         {/if}
+        
         </div>
     </div>
 {/if}
