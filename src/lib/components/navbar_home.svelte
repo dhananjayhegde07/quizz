@@ -14,14 +14,16 @@
         2:'notactive',
         3:'notactive',
         4:'notactive',
-        5:'notactive'
+        5:'notactive',
+        6:'notactive'
     }
     let nav_obj={
         div1:null,
         div2:null,
         div3:null,
         div4:null,
-        div5:null
+        div5:null,
+        div6:null
     }
 
     $:{
@@ -79,6 +81,12 @@
             disp('navigate','auth')
         }}>
             <p bind:this={nav_obj.div4}>Authorised access</p>
+        </div>
+        <div class="menu {obj['6']}"  on:click={()=>{
+            change_mode('6',nav_obj.div6)
+            disp('navigate','our')
+        }}>
+            <p bind:this={nav_obj.div4}>Our Quizz</p>
         </div>
     </div>
 </div>

@@ -9,7 +9,7 @@
     
     let setobj={
         duration: 1,
-        e_type: "3",
+        e_type: "1",
         islimit: false,
         level: "easy",
         limit: 10,

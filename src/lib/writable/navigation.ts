@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
 
 
-export const nav_bar=writable({home:true,conduct:false,take:false,quizz:false,auth:false})
+export const nav_bar=writable({home:true,conduct:false,take:false,quizz:false,auth:false,our:false})
