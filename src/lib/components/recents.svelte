@@ -30,6 +30,12 @@
         data.count=curr.count
         data.limit=curr.settings.limit
         let count=0,lenth=curr.qns.length,avg=0
+        if(curr.taken.length==0){
+            data.avg=-1
+            data.high=0
+            data.low=0
+            return
+        }
         let high=0,low=curr.taken[0].result
         for(let i of curr.taken){
             if(i.result>high)high=i.result

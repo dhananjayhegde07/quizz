@@ -10,7 +10,14 @@
     let avg=0,low,high=0
     function calc(){
         if(Object.keys(data).length==0)return
-        let res=0,low=data.taken[0].result
+        if(data.taken.length==0){
+            avg=-1
+            low=0
+            high=0
+            return
+        }
+        let res=0
+        low=data.taken[0].result
         for(let i of data.taken){
             res+=(i.result)/data.qns.length
             if(i.result>high)high=i.result
